@@ -26,7 +26,7 @@ public class PlayerController : Controller
 
     public override void ProcessInputs()
     {
-       if (Input.GetKeyDown(moveForwardkey))
+        if (Input.GetKey(moveForwardkey))
         {
             pawn.MoveForward();
         }

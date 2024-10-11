@@ -30,13 +30,13 @@ public class TankPawn : Pawn
 
     public override void RotateClockwise()
     {
-        Debug.Log("Rotating Clockwise");
+        //Debug.Log("Rotating Clockwise");
         mover.Rotate(turnSpeed);
     }
 
     public override void RotateCounterClockwise()
     {
-        Debug.Log("Rotating CounterClockWise");
+        //Debug.Log("Rotating CounterClockWise");
         mover.Rotate(-turnSpeed);
     }
 }
