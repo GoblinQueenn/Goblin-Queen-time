@@ -41,7 +41,7 @@ public class PlayerController : Controller
             pawn.RotateClockwise();
         }
 
-        if (Input.GetKey(rotateClockwisekey))
+        if (Input.GetKey(rotateCounterClockwisekey))
         {
             pawn.RotateCounterClockwise();
         }
