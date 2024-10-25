@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public Transform playerSpawnTransform;
 
     // List of player Controllers
-    public List<PlayerController> players new List<PlayerController>();
+    public List<PlayerController> players = new List<PlayerController>();
 
     //awake is called when the object is first created - before even start can run!
     private void Awake()
