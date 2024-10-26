@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
         // Get the Player Controller compont and pawn
         Controller newController = newPlayerObj.GetComponent<Controller>();
-        Pawn newPawn = newPlayerObj.GetComponent<Pawn>();
+        Pawn newPawn = newPawnObj.GetComponent<Pawn>();
 
         // hook them up
         newController.pawn = newPawn;

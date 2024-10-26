@@ -11,12 +11,25 @@ public abstract class Pawn : MonoBehaviour
 
     // Varible for our Mover
     public Mover mover;
+    // Varible for our Shooter
+    public Shooter shooter;
+
+    // Variable for our shell Prefab
+    public GameObject shellPrefab;
+    //Variable for our firing force
+    public float fireForce;
+    // Variable for damage done
+    public float damageDone;
+    // Variable for bullet lifespan
+    public float shellLifespan;
 
     // Start is called before the first frame update
     public virtual void Start()
     {
         // initialize our Mover component
         mover = GetComponent<Mover>();
+        // Initialize our Shooter componant
+        shooter = GetComponent<Shooter>();
     }
 
     // Update is called once per frame
@@ -29,4 +42,5 @@ public abstract class Pawn : MonoBehaviour
     public abstract void MoveBackward();
     public abstract void RotateClockwise();
     public abstract void RotateCounterClockwise();
+    public abstract void Shoot();
 }

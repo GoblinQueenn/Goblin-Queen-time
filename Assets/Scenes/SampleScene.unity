@@ -429,6 +429,68 @@ MonoBehaviour:
   moveSpeed: 10
   turnSpeed: 360
   mover: {fileID: 0}
+  shooter: {fileID: 0}
+  shellPrefab: {fileID: 0}
+  fireForce: 0
+  damageDone: 0
+  shellLifespan: 0
+--- !u!1001 &1025387931
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8498714243377677529, guid: 57deb45715510d84c9a8adb2015ead34, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.8454103
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498714243377677529, guid: 57deb45715510d84c9a8adb2015ead34, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5275305
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498714243377677529, guid: 57deb45715510d84c9a8adb2015ead34, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.219771
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498714243377677529, guid: 57deb45715510d84c9a8adb2015ead34, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498714243377677529, guid: 57deb45715510d84c9a8adb2015ead34, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498714243377677529, guid: 57deb45715510d84c9a8adb2015ead34, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498714243377677529, guid: 57deb45715510d84c9a8adb2015ead34, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498714243377677529, guid: 57deb45715510d84c9a8adb2015ead34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498714243377677529, guid: 57deb45715510d84c9a8adb2015ead34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498714243377677529, guid: 57deb45715510d84c9a8adb2015ead34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131803880078974563, guid: 57deb45715510d84c9a8adb2015ead34, type: 3}
+      propertyPath: m_Name
+      value: UATank
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 57deb45715510d84c9a8adb2015ead34, type: 3}
 --- !u!1 &1815675778
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,6 +523,7 @@ MonoBehaviour:
   playerControllerPrefab: {fileID: 7418110959240180674, guid: bd3e68d030332574a87a68afd27e8fb6, type: 3}
   tankPawnPrefab: {fileID: 9131803880078974563, guid: 57deb45715510d84c9a8adb2015ead34, type: 3}
   playerSpawnTransform: {fileID: 2047942480}
+  players: []
 --- !u!4 &1815675780
 Transform:
   m_ObjectHideFlags: 0
@@ -516,3 +579,4 @@ SceneRoots:
   - {fileID: 1815675780}
   - {fileID: 983875759}
   - {fileID: 2047942480}
+  - {fileID: 1025387931}
