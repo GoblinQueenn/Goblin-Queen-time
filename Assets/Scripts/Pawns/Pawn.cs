@@ -22,6 +22,8 @@ public abstract class Pawn : MonoBehaviour
     public float damageDone;
     // Variable for bullet lifespan
     public float shellLifespan;
+    //Variable for Rate of Fire
+    public float fireRate;
 
     // Start is called before the first frame update
     public virtual void Start()

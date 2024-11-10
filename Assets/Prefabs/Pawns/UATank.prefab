@@ -182,11 +182,12 @@ MonoBehaviour:
   moveSpeed: 10
   turnSpeed: 360
   mover: {fileID: 5930895502551877335}
-  shooter: {fileID: 0}
+  shooter: {fileID: 419175233491639906}
   shellPrefab: {fileID: 872042407493893339, guid: cd6f4fc447909244593c152e98868554, type: 3}
-  fireForce: 10000
+  fireForce: 1000
   damageDone: 10
   shellLifespan: 3
+  fireRate: 2
 --- !u!114 &5930895502551877335
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@ public class TankShooter : Shooter
         // Get the Rigidbody component
         Rigidbody rb = newShell.GetComponent<Rigidbody>();
         //If it has one
-        if(rb is null)
+         if(rb != null)
         {
             // AddForce method to make it move forward
             rb.AddForce(firepointTransform.forward * fireForce);

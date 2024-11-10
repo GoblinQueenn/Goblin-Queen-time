@@ -22,7 +22,7 @@ public class DamageOnHit : MonoBehaviour
     public void OnTriggerEnter(Collider Other)
     {
         // Get the health compoent from the object we are colliding with
-        Health otherHealth = Other.GetComponent<Health>();
+        Health otherHealth = Other.gameObject.GetComponent<Health>();
 
         //Only damage if the object has a Health component
         if(otherHealth != null)
