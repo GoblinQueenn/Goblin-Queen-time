@@ -63,4 +63,19 @@ public class TankPawn : Pawn
             nextEventTime = Time.time + 1 / fireRate;
         }
     }
+
+    public override void MakeNoise()
+    {
+        if (noiseMaker != null)
+        {
+            noiseMaker.volumeDistance = noiseMakerVolume;
+        }
+    }
+    public override void StopNoise()
+    {
+        if(noiseMaker != null)
+        {
+            noiseMaker.volumeDistance = 0;
+        }
+    }
 }

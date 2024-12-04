@@ -19,7 +19,7 @@ public class AIController : Controller
     // Start is called before the first frame update
    public override void Start()
     {
-        ChangeState(currentState);
+        ChangeState(AIState.Chase);
 
         base.Start();
     }
@@ -46,7 +46,7 @@ public class AIController : Controller
                 {
                     ChangeState(AIState.Chase);
                 }*/
-                if (CanHear(target))
+                if (CanSee(target))
                 {
                     ChangeState(AIState.Chase);
                 }
@@ -64,7 +64,7 @@ public class AIController : Controller
                 {
                     ChangeState(AIState.Guard);
                 }*/
-                if(!CanHear(target))
+                if(!CanSee(target))
                 {
                     ChangeState(AIState.Guard);
                 }
@@ -155,10 +155,6 @@ public class AIController : Controller
         // to the hearing distance of this AI agent
         float totalDistance = noiseMaker.volumeDistance + hearingDistance;
 
-        // if the target is making noise, then add the volumeDistance of the noisemaker
-        // to the hearing distance of this AI agent
-        float totalDistance = noiseMaker.volumeDistance + hearingDistance;
-
         // if the distance betweem our pawn and target is closer than the total distance
         // AKA r1 = r2
         if (Vector3.Distance(pawn.transform.position, target.transform.position) <= totalDistance)
@@ -173,17 +169,35 @@ public class AIController : Controller
         }
     }
 
-    public TooltipAttribute CanSee(GameObject target)
+    public bool CanSee(GameObject target)
     {
         // Find the vector fro, the agent to the target
-        Vector2 agentToTargetVector = target.transform.position - pawn.transform.position;
+        Vector3 agentToTargetVector = target.transform.position - pawn.transform.position;
 
         // find the angle between the foward facing vector and the vector to our target
         float angleToTarget = Vector3.Angle(agentToTargetVector, pawn.transform.forward);
 
         if (angleToTarget < FieldOfView)
         {
-            return true;
+
+            RaycastHit hit;
+
+            // Do the addtional check of whether anythining is blocking the vine of the target
+            if (Physics.Raycast(pawn.transform.position + (Vector3.up)/2.0f, agentToTargetVector.normalized, out hit))
+            {
+                if (hit.collider.gameObject == target)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
