@@ -6,7 +6,7 @@ public class CowardlyAIController : AIController
 {
     public enum CowardlyAIState { Cower, Cry, };
 
-    public CowardlyAIState currentAIControllerState
+    public CowardlyAIState currentAIControllerState;
 
     // Start is called before the first frame update
     public override void Start()
