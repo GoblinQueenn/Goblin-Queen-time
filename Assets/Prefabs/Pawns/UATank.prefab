@@ -108,6 +108,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2e62c076bafb3304ba41f5733fdfb881, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5713765219127461030}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2e62c076bafb3304ba41f5733fdfb881, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5782528728520042242}
   m_SourcePrefab: {fileID: 100100000, guid: 2e62c076bafb3304ba41f5733fdfb881, type: 3}
 --- !u!4 &8498714243377677529 stripped
 Transform:
@@ -183,11 +186,13 @@ MonoBehaviour:
   turnSpeed: 360
   mover: {fileID: 5930895502551877335}
   shooter: {fileID: 419175233491639906}
+  noiseMaker: {fileID: 0}
   shellPrefab: {fileID: 872042407493893339, guid: cd6f4fc447909244593c152e98868554, type: 3}
   fireForce: 1000
   damageDone: 10
   shellLifespan: 3
   fireRate: 2
+  noiseMakerVolume: 0
 --- !u!114 &5930895502551877335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,3 +232,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   maxHealth: 100
+--- !u!114 &5782528728520042242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9131803880078974563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231a6585614b32541b58e12138b6f90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

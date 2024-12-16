@@ -19,6 +19,17 @@ public class AIController : Controller
     // Start is called before the first frame update
    public override void Start()
     {
+        // If we have a GameManger
+        if (GameManager.Instance != null)
+        {
+            // And it tracking our enemies in a list
+            if (GameManager.Instance.enemies != null)
+            {
+                // Register ourselfs with the GameManager
+                GameManager.Instance.enemies.Add(this);
+            }
+        }
+
         ChangeState(AIState.Chase);
 
         base.Start();
@@ -46,7 +57,7 @@ public class AIController : Controller
                 {
                     ChangeState(AIState.Chase);
                 }*/
-                if (CanSee(target))
+                if (CanHear(target))
                 {
                     ChangeState(AIState.Chase);
                 }
@@ -64,7 +75,7 @@ public class AIController : Controller
                 {
                     ChangeState(AIState.Guard);
                 }*/
-                if(!CanSee(target))
+                if(!CanHear(target))
                 {
                     ChangeState(AIState.Guard);
                 }

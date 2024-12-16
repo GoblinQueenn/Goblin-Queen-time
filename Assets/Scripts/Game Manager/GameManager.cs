@@ -9,11 +9,29 @@ public class GameManager : MonoBehaviour
     // Prefabs
     public GameObject playerControllerPrefab;
     public GameObject tankPawnPrefab;
+    public GameObject cameraPrefab;
 
-    public Transform playerSpawnTransform;
+    // Player camra offsets
+    public float cameraOffsetBack;
+    public float cameraOffsetUp;
+
+    //public Transform playerSpawnTransform;
+
+    // Reference to our Map Generator
+    public MapGenerator mapGenerator;
 
     // List of player Controllers
     public List<PlayerController> players = new List<PlayerController>();
+
+    // List of AI Controllers
+    public List<AIController> enemies = new List<AIController>();
+
+    // List of Pawn SpawnPoints
+    public PawnSpawnPoint[] pawnSpawnPoints;
+
+    // Game States
+    public GameObject TitleScreenStateObject;
+
 
     //awake is called when the object is first created - before even start can run!
     private void Awake()
@@ -35,6 +53,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mapGenerator.GenerateMap();
+
         SpawnPlayer();
     }
 
@@ -46,20 +66,40 @@ public class GameManager : MonoBehaviour
 
     public void SpawnPlayer()
     {
-        // Spawn the Player Controller at (o, o, o) with no rotation
-        GameObject newPlayerObj = Instantiate(playerControllerPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-        // Spawn our Pawn and connect it to our Controller
-        GameObject newPawnObj = Instantiate(tankPawnPrefab, playerSpawnTransform.position, playerSpawnTransform.rotation) as GameObject;
+        Transform spawnPoint = null;
+       
+       // Find PawnSpawnPoints by type
+       pawnSpawnPoints = FindObjectsByType<PawnSpawnPoint>(FindObjectsSortMode.None);
+       
 
-        // Get the Player Controller compont and pawn
-        Controller newController = newPlayerObj.GetComponent<Controller>();
-        Pawn newPawn = newPawnObj.GetComponent<Pawn>();
+        if (pawnSpawnPoints.Length > 0)
+        {
+            // Randomly select a spawnPoint
+            spawnPoint = pawnSpawnPoints[Random.Range(0, pawnSpawnPoints.Length)].transform;
+        }
 
-        newPawnObj.AddComponent<NoiseMaker>();
-        newPawn.noiseMaker = newPawnObj.GetComponent<NoiseMaker>();
-        newPawn.noiseMakerVolume = 3;
+        if (spawnPoint != null)
+        {
+            // Spawn the Player Controller at (o, o, o) with no rotation
+            GameObject newPlayerObj = Instantiate(playerControllerPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+            // Spawn our Pawn and connect it to our Controller
+            GameObject newPawnObj = Instantiate(tankPawnPrefab, spawnPoint.position, spawnPoint.rotation) as GameObject;
 
-        // hook them up
-        newController.pawn = newPawn;
+            // Spawn our camera behind the tank (UPDATE TO REMOVE MAGIC NUMBERS)
+            GameObject newCameraObj = Instantiate(cameraPrefab, spawnPoint.position + (Vector3.back * cameraOffsetBack) + (Vector3.up * cameraOffsetUp), spawnPoint.rotation) as GameObject;
+
+            // Get the Player Controller compont and pawn
+            Controller newController = newPlayerObj.GetComponent<Controller>();
+            Pawn newPawn = newPawnObj.GetComponent<Pawn>();
+
+            newPawnObj.AddComponent<NoiseMaker>();
+            newPawn.noiseMaker = newPawnObj.GetComponent<NoiseMaker>();
+            newPawn.noiseMakerVolume = 3;
+
+            // hook them up
+            newController.pawn = newPawn;
+
+            newCameraObj.transform.parent = newPlayerObj.transform;
+        }
     }
 }
