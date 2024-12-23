@@ -31,7 +31,11 @@ public class GameManager : MonoBehaviour
 
     // Game States
     public GameObject TitleScreenStateObject;
-
+    public GameObject MainMenuStateObject;
+    public GameObject OptionsScreenStateObject;
+    public GameObject CreditsScreenStateObject;
+    public GameObject GameplayStateObject;
+    public GameObject GameOverScreenStateObject;
 
     //awake is called when the object is first created - before even start can run!
     private void Awake()
@@ -53,24 +57,25 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mapGenerator.GenerateMap();
+        ActivateTitleScreen();
+        // mapGenerator.GenerateMap();
 
-        SpawnPlayer();
+        // SpawnPlayer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SpawnPlayer()
     {
         Transform spawnPoint = null;
-       
-       // Find PawnSpawnPoints by type
-       pawnSpawnPoints = FindObjectsByType<PawnSpawnPoint>(FindObjectsSortMode.None);
-       
+
+        // Find PawnSpawnPoints by type
+        pawnSpawnPoints = FindObjectsByType<PawnSpawnPoint>(FindObjectsSortMode.None);
+
 
         if (pawnSpawnPoints.Length > 0)
         {
@@ -98,8 +103,137 @@ public class GameManager : MonoBehaviour
 
             // hook them up
             newController.pawn = newPawn;
+            newPawn.controller = newController;
 
-            newCameraObj.transform.parent = newPlayerObj.transform;
+            newCameraObj.transform.parent = newPawnObj.transform;
+        }
+    }
+
+    public void RespawnPlayer(Controller playerToRespawn)
+    {
+        if (playerToRespawn.lives > 0)
+        {
+            Transform spawnPoint = null;
+
+            // Find PawnSpawnPoints by type
+            pawnSpawnPoints = FindObjectsByType<PawnSpawnPoint>(FindObjectsSortMode.None);
+
+
+            if (pawnSpawnPoints.Length > 0)
+            {
+                // Randomly select a spawnPoint
+                spawnPoint = pawnSpawnPoints[Random.Range(0, pawnSpawnPoints.Length)].transform;
+            }
+
+            if (spawnPoint != null)
+            {
+                GameObject newPawnObj = Instantiate(tankPawnPrefab, spawnPoint.position, spawnPoint.rotation) as GameObject;
+
+                Pawn newPawn = newPawnObj.GetComponent<Pawn>();
+
+                playerToRespawn.pawn = newPawn;
+
+                newPawn.controller = playerToRespawn;
+            }
+        }
+    }
+
+    // Helper function for deativating all game states
+    private void DeactivateAllStates()
+    {
+        // Deactivate all your states
+        TitleScreenStateObject.SetActive(false);
+        MainMenuStateObject.SetActive(false);
+        OptionsScreenStateObject.SetActive(false);
+        CreditsScreenStateObject.SetActive(false);
+        GameplayStateObject.SetActive(false);
+        GameOverScreenStateObject.SetActive(false);
+    }
+
+    // Game state transition functions
+
+
+    public void ActivateTitleScreen()
+    {
+        // Deactivate all states
+        DeactivateAllStates();
+        // Activate the title screen
+        TitleScreenStateObject.SetActive(true);
+    }
+
+    public void ActivateOptionsScreen()
+    {
+        // Deacivate all states
+        DeactivateAllStates();
+        // Activate
+        OptionsScreenStateObject.SetActive(true);
+    }
+    public void ActivateMainMenu()
+    {
+        // Deacivate all states
+        DeactivateAllStates();
+        // Activate
+        MainMenuStateObject.SetActive(true);
+    }
+    public void ActivateCredits()
+    {
+        // Deacivate all states
+        DeactivateAllStates();
+        // Activate
+        CreditsScreenStateObject.SetActive(true);
+    }
+    public void ActivateGamePlay()
+    {
+        // Deacivate all states
+        DeactivateAllStates();
+        // Activate
+        GameplayStateObject.SetActive(true);
+        // Start level
+        mapGenerator.GenerateMap();
+
+        SpawnPlayer();
+    }
+    public void ActivateGameOver()
+    {
+        // Deacivate all states
+        DeactivateAllStates();
+        // Activate
+        GameOverScreenStateObject.SetActive(true);
+    }
+
+    // Stub helper function to Toggle Map Of Day
+    public void ActivateMapOfTheDay()
+    {
+        if (mapGenerator != null)
+        {
+            // Activate map of the day
+            mapGenerator.isMapOfTheDay = true;
+            mapGenerator.isMapSeed = false;
+            mapGenerator.isCurrentTime = false;
+        }
+    }
+
+    // Stub helper function to Toggle Random Map
+    public void ActivateRandomMap()
+    {
+        if (mapGenerator != null)
+        {
+            // Activate Random Map
+            mapGenerator.isMapOfTheDay = false;
+            mapGenerator.isMapSeed = false;
+            mapGenerator.isCurrentTime = true;
+        }
+    }
+
+    // Stub helper function to enble Random Map Seed
+    public void ActivateRandomMapSeed()
+    {
+         if (mapGenerator != null)
+        {
+            // Activate Random Map Seed
+            mapGenerator.isMapOfTheDay = false;
+            mapGenerator.isMapSeed = true;
+            mapGenerator.isCurrentTime = false;
         }
     }
 }

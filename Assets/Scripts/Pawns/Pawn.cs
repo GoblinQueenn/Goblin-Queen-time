@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class Pawn : MonoBehaviour
 {
+    // Varble for referncing our controler
+    public Controller controller;
+
     // Varible for move speed
     public float moveSpeed;
     // Varible for turn speed

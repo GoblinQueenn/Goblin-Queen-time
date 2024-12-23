@@ -57,7 +57,7 @@ public class AIController : Controller
                 {
                     ChangeState(AIState.Chase);
                 }*/
-                if (CanHear(target))
+                if (CanSee(target))
                 {
                     ChangeState(AIState.Chase);
                 }
@@ -75,7 +75,7 @@ public class AIController : Controller
                 {
                     ChangeState(AIState.Guard);
                 }*/
-                if(!CanHear(target))
+                if(!CanSee(target))
                 {
                     ChangeState(AIState.Guard);
                 }

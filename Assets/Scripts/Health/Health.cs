@@ -7,6 +7,8 @@ public class Health : MonoBehaviour
     public float currentHealth;
     public float maxHealth;
 
+    public float pointsAwarded;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,10 +24,10 @@ public class Health : MonoBehaviour
 
     public void takeDamage(float amount, Pawn source)
     {
-        currentHealth += amount;
+        currentHealth -= amount;
         Debug.Log(source.name + "did" + amount + " damge to" + gameObject.name);
 
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+          currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         if (currentHealth <= 0)
         {
@@ -44,6 +46,21 @@ public class Health : MonoBehaviour
 
     public void Die(Pawn source)
     {
+        source.controller.AddToScore(pointsAwarded);
+
+        Controller controller = GetComponent<Pawn>().controller;
+
+        if (controller != null)
+        {
+            controller.RemoveFromLives();
+            // Signal to our game manager to repawn our player possibly
+        }
+
         Destroy(gameObject);
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ActivateGameOver();
+        }
     }
 }
